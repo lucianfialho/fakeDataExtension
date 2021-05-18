@@ -1,16 +1,16 @@
 {
-    "name": "Fake data generator extension",
-    "version": "1.0",
-    "manifest_version": 3,
-    "action": {},
-    "background":{
-        "service_worker": "background.js"
-    },
-    "permissions": [
-      "contextMenus",
-      "scripting"
-    ],
-    "host_permissions": [
-      "<all_urls>"
-    ]
+  "name": "Fake data generator extension",
+  "version": "1.0",
+  "permissions": ["contextMenus"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["script.js"],
+    "all_frames": true,
+    "match_about_blank": true
+  }],
+  "manifest_version": 2
   }

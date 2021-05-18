@@ -1,29 +1,14 @@
-chrome.runtime.onInstalled.addListener(async () => {
+var menuItem = {
+    "id": "generateCpf",
+    "title": "Gerar CPF",
+    "contexts": ["editable"],
+};
 
-    chrome.contextMenus.create({
-        "id" : "Some id",
-        "title" : "My Context Menu",
-        "contexts": ["editable"]
-    })
-    
-    const currentTab = await getCurrentTab()
+chrome.contextMenus.create(menuItem);
 
-    chrome.scripting.executeScript(
-    {
-        target: {tabId: currentTab.id},
-        files: ['script.js'],
+
+chrome.contextMenus.onClicked.addListener(function(info, tab){   
+    chrome.tabs.sendMessage(tab.id, "getClickedEl", {frameId: info.frameId}, data => {
+        elt.value = data.value;
     });
-    chrome.contextMenus.onClicked.addListener(tab => {
-        
-    })
 });
-
-function showAlert() {
-    alert("test!");
-  }
-
-async function getCurrentTab() {
-    let queryOptions = { active: true, currentWindow: true };
-    let [tab] = await chrome.tabs.query(queryOptions);
-    return tab;
-}
