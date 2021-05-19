@@ -44,7 +44,7 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
            }};
         
         
-        const options = info.menuItemId == 'gerar_cc'? `acao=${info.menuItemId}&pontuacao=S&bandeira=master`:  `acao=${info.menuItemId}&pontuacao=S&`;
+        const options = info.menuItemId == 'gerar_cc' ? `acao=${info.menuItemId}&pontuacao=S&bandeira=master`:  `acao=${info.menuItemId}&pontuacao=S&`;
         
         xhr.send(options);
 
@@ -55,9 +55,8 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
 function getCCNumberFromResponse (html) {
     const parser = new DOMParser()
     const htmlParsed = parser.parseFromString (html, "text/html");
-    
-    
+
     const cc = htmlParsed.getElementById("cartao_numero").innerText
 
-    return cc.trim()
+    return cc
 }
